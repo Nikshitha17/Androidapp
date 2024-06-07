@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="#A4B0BF"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
@@ -14,6 +15,7 @@
         android:layout_marginTop="88dp"
         android:ems="10"
         android:inputType="text"
+        android:textColor="@color/mycolor"
         android:hint="Enter your Name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -35,6 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="62dp"
         android:layout_marginTop="56dp"
+        android:textColor="@android:color/holo_blue_light"
         android:text="Login"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
