@@ -39,7 +39,7 @@
         android:layout_marginTop="56dp"
         android:onClick="clickHandler"
         android:textColor="@android:color/holo_blue_light"
-        android:text="@string/hint_enterlogin"
+        android:text="@string/login_label"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
 </androidx.constraintlayout.widget.ConstraintLayout>
