@@ -1,14 +1,13 @@
 package com.nikapps.androidapp1.kotlinexs
 
+fun calculate(x: Int, y: Int, operation: (Int, Int) -> Int): Int {  // 1
+    return operation(x, y)                                          // 2
+}
+
+fun sum(x: Int, y: Int) = x + y                                     // 3
+
 fun main() {
-
-    var myStudent: Student = Student("Nikshitha",20,"Bangalore")
-    println(myStudent.name)
-    myStudent.name = "Niharika"
-    println(myStudent.name)
-
-    var myEmployee: Employee = Employee("Riya",27,"Chennai")
-    println(myEmployee.getName())
-    println(myEmployee.name)
-
+    val sumResult = calculate(4, 5, ::sum)                          // 4
+    val mulResult = calculate(4, 5) { a, b -> a * b }               // 5
+    println("sumResult $sumResult, mulResult $mulResult")
 }
