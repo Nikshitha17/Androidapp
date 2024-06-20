@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.ImageView
+import coil.load
 import com.nikapps.androidapp1.network.MarsApi
 import com.nikapps.androidapp1.network.MarsPhoto
 import kotlinx.coroutines.GlobalScope
@@ -22,13 +24,14 @@ class HomeActivity : AppCompatActivity(){
     lateinit var marsRecyclerView: RecyclerView
     lateinit var marsAdapter: MarsAdapter
     lateinit var photos:List<MarsPhoto>
-
+    lateinit var imageView: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_home)
         marsRecyclerView = findViewById(R.id.recyclerViewUrls)
+        imageView = findViewById(R.id.imageView)
         marsRecyclerView.layoutManager = LinearLayoutManager(this)
         photos = ArrayList()
         marsAdapter = MarsAdapter(photos)
@@ -40,13 +43,13 @@ class HomeActivity : AppCompatActivity(){
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
     }
 
     private fun getMarsPhotos() {
         GlobalScope.launch(Dispatchers.Main)  {
             var listMarsPhotos =   MarsApi.retrofitService.getPhotos()
             marsAdapter.listMarsPhotos = listMarsPhotos
+            imageView.load(listMarsPhotos.get(0).imgSrc)
             marsAdapter.notifyDataSetChanged()
 //          var tvHome: TextView = findViewById(R.id.tvHome)
 //          tvHome.setText(listMarsPhotos.get(1).imgSrc)

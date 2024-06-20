@@ -22,8 +22,6 @@ private val retrofit = Retrofit.Builder()
     .baseUrl(BASE_URL)
     .build()
 
-
-
 interface MarsApiService {
     @GET("photos")//endpoint
     suspend fun getPhotos():List<MarsPhoto>
