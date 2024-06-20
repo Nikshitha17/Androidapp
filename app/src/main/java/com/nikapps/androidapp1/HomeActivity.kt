@@ -13,6 +13,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.Dispatchers
+import okhttp3.Dispatcher
 
 class HomeActivity : AppCompatActivity(){
     var TAG = HomeActivity::class.java.simpleName //"HomeActivity"
@@ -42,9 +44,9 @@ class HomeActivity : AppCompatActivity(){
     }
 
     private fun getMarsPhotos() {
-        GlobalScope.launch {
+        GlobalScope.launch(Dispatchers.Main)  {
             var listMarsPhotos =   MarsApi.retrofitService.getPhotos()
-            photos = listMarsPhotos
+            marsAdapter.listMarsPhotos = listMarsPhotos
             marsAdapter.notifyDataSetChanged()
 //          var tvHome: TextView = findViewById(R.id.tvHome)
 //          tvHome.setText(listMarsPhotos.get(1).imgSrc)
