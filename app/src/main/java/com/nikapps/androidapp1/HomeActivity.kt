@@ -16,26 +16,29 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.Dispatchers
+import com.nikapps.androidapp1.databinding.ActivityHomeBinding
 import okhttp3.Dispatcher
 
 class HomeActivity : AppCompatActivity(){
     var TAG = HomeActivity::class.java.simpleName //"HomeActivity"
 
-    lateinit var marsRecyclerView: RecyclerView
+//  lateinit var marsRecyclerView: RecyclerView
+    private lateinit var binding: ActivityHomeBinding
     lateinit var marsAdapter: MarsAdapter
     lateinit var photos:List<MarsPhoto>
-    lateinit var imageView: ImageView
+//  lateinit var imageView: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_home)
-        marsRecyclerView = findViewById(R.id.recyclerViewUrls)
-        imageView = findViewById(R.id.imageView)
-        marsRecyclerView.layoutManager = LinearLayoutManager(this)
+//        setContentView(R.layout.activity_home)
+//        marsRecyclerView = findViewById(R.id.recyclerViewUrls)
+//        imageView = findViewById(R.id.imageView)
+//        marsRecyclerView.layoutManager = LinearLayoutManager(this)
         photos = ArrayList()
         marsAdapter = MarsAdapter(photos)
-        marsRecyclerView.adapter = marsAdapter
+//        marsRecyclerView.adapter = marsAdapter
+        binding.recyclerViewUrls.adapter = marsAdapter
 
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
