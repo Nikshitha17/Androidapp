@@ -9,6 +9,7 @@ import com.nikapps.androidapp1.database.Item
 import com.nikapps.androidapp1.database.ItemDao
 import com.nikapps.androidapp1.database.ItemRoomDatabase
 import com.nikapps.androidapp1.databinding.ActivityHomeBinding
+import androidx.lifecycle.ViewModelProvider
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.last
@@ -21,7 +22,8 @@ class HomeActivity : AppCompatActivity() {
     var TAG = HomeActivity::class.java.simpleName //"HomeActivity"
     private lateinit var binding: ActivityHomeBinding
     lateinit var dao: ItemDao
-
+    lateinit var viewModel: HomeViewModel
+    var count = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,12 +33,24 @@ class HomeActivity : AppCompatActivity() {
         setContentView(view)
         var database = ItemRoomDatabase.getDatabase(this)
         dao = database.itemDao()
+        viewModel = ViewModelProvider(this)[HomeViewModel::class.java]
+
+        binding.tvHome.setText(""+count)
         binding.btnDbInsert.setOnClickListener {
             insertDataDb()
         }
         binding.btnFind.setOnClickListener {
             findItemDb(21)
         }
+        binding.btnInc.setOnClickListener{
+            count++
+            //viewModel.incrementCount()
+            binding.tvHome.setText(""+count)
+            //+viewModel.count)
+        }
+    }
+    fun add(a:Int,b:Int):Int{
+        return a+b
     }
 
     private fun findItemDb(id: Int) {
