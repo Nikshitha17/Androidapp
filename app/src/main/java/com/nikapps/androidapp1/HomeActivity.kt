@@ -23,7 +23,7 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
     lateinit var dao: ItemDao
     lateinit var viewModel: HomeViewModel
-    var count = 0
+//    var count = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +35,7 @@ class HomeActivity : AppCompatActivity() {
         dao = database.itemDao()
         viewModel = ViewModelProvider(this)[HomeViewModel::class.java]
 
-        binding.tvHome.setText(""+count)
+        binding.tvHome.setText(""+viewModel.count)
         binding.btnDbInsert.setOnClickListener {
             insertDataDb()
         }
@@ -43,10 +43,9 @@ class HomeActivity : AppCompatActivity() {
             findItemDb(21)
         }
         binding.btnInc.setOnClickListener{
-            count++
-            //viewModel.incrementCount()
-            binding.tvHome.setText(""+count)
-            //+viewModel.count)
+//            count++
+            viewModel.incrementCount()
+            binding.tvHome.setText(""+viewModel.count)
         }
     }
     fun add(a:Int,b:Int):Int{
