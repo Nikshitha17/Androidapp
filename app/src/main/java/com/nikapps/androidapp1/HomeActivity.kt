@@ -10,6 +10,7 @@ import com.nikapps.androidapp1.database.ItemDao
 import com.nikapps.androidapp1.database.ItemRoomDatabase
 import com.nikapps.androidapp1.databinding.ActivityHomeBinding
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.Observer
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.last
@@ -34,8 +35,8 @@ class HomeActivity : AppCompatActivity() {
         var database = ItemRoomDatabase.getDatabase(this)
         dao = database.itemDao()
         viewModel = ViewModelProvider(this)[HomeViewModel::class.java]
+        viewModel._seconds.observe(this, secsObserver);
 
-        binding.tvHome.setText(""+viewModel.count)
         binding.btnDbInsert.setOnClickListener {
             insertDataDb()
         }
@@ -46,6 +47,10 @@ class HomeActivity : AppCompatActivity() {
 //            count++
             viewModel.incrementCount()
             binding.tvHome.setText(""+viewModel.count)
+        }
+        binding.btnTimer.setOnClickListener{
+            viewModel.startTimer()
+            binding.tvHome.setText(""+viewModel._seconds)
         }
     }
     fun add(a:Int,b:Int):Int{
@@ -59,10 +64,16 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-        private fun insertDataDb() {
-            GlobalScope.launch {
-                var item = Item(21, "fruits", 11.11, 11)
-                dao.insert(item)
+    private fun insertDataDb() {
+        GlobalScope.launch {
+            var item = Item(21, "fruits", 11.11, 11)
+            dao.insert(item)
             }
         }
+    var secsObserver : Observer<Int> = object :Observer<Int>{
+        override fun onChanged(observedValue: Int) {
+            //receiving the update/notification
+            binding.tvHome.setText(observedValue.toString())
+        }
+    }
 }
